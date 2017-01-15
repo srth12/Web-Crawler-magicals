@@ -13,7 +13,8 @@ import java.util.Properties;
 
 public class DBConnect {
 
-	public void createConnection() {
+	private Statement stmt;
+	public Statement createConnection() {
 		Properties prop = new Properties();
 		InputStream file = null;
 		String host = null;
@@ -37,12 +38,13 @@ public class DBConnect {
 		}
 		try {
 			Connection con = DriverManager.getConnection(host, username, password);
-			Statement stmt = con.createStatement();
+			stmt = con.createStatement();
 			ResultSet result = stmt.executeQuery("select 1  from dual");
 			System.out.println(result.getInt(0));
 		} catch (SQLException e) {
 			System.err.println("Can't connect to DB");
 			e.printStackTrace();
 		}
+		return stmt;
 	}
 }

@@ -8,8 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
-public class FileHandler {
+import org.apache.log4j.Logger;
 
+import com.amazon.dto.DataAccess;
+
+public class FileHandler {
+	final static Logger logger = Logger.getLogger(FileHandler.class);
+	
 	/**
 	 * This function will help read 
 	 * @param fileName
@@ -27,11 +32,13 @@ public class FileHandler {
 			
 		}catch(IOException e){
 			System.err.println("error reading url_paths.data file");
+			logger.error("error reading url_paths.data file", e);
 			e.printStackTrace();
 		}finally{
 			try {
 				file.close();
 			} catch (IOException e) {
+				logger.error("Can't close file",e);
 				System.err.println("Can't close file");
 				e.printStackTrace();
 			}
@@ -46,9 +53,11 @@ public class FileHandler {
 			writer.flush();
 		} catch (FileNotFoundException e) {
 			System.err.println("Failed to find file");
+			logger.error("Failed to find file",e);
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.err.println("Failed to write file");
+			logger.error("Failed to write file",e);
 			e.printStackTrace();
 		}
 		
