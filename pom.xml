@@ -16,11 +16,8 @@
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/ojdbc/ojdbc -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.3</version>
-		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
 		<dependency>

@@ -19,13 +19,28 @@ public class DataAccess {
 	}
 
 	public void insertData(String tableName, List<String> columnNames, List<String> values) {
-		String sql = " insert into " + tableName + " set(" + StringUtils.join(columnNames, ",") + ") values( "
+		String sql = " insert into " + tableName + " (" + StringUtils.join(columnNames, ",") + ") values( "
 				+ StringUtils.join(values, ",") + " )";
 		try {
+			if(sql.contains("&")){
+				sql.replace("&", "' || chr(38) || '");
+			}
 			stmt.executeQuery(sql);
 		} catch (SQLException e) {
 			System.err.println("Error in sql"+sql);
 			logger.error("Error in sql", e);
+			e.printStackTrace();
+		}
+	}
+
+	public void dropTable(String tableName) {
+		
+		String sql="delete "+tableName;
+		try {
+			stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			System.err.println("Failed to drop table: "+tableName);
+			logger.error("Failed to drop table: "+tableName,e);
 			e.printStackTrace();
 		}
 	}

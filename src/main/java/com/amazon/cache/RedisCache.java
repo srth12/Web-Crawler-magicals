@@ -1,8 +1,8 @@
 package com.amazon.cache;
 
-import org.apache.log4j.Logger;
+import java.util.List;
 
-import com.amazon.dao.FileHandler;
+import org.apache.log4j.Logger;
 
 import redis.clients.jedis.Jedis;
 
@@ -15,7 +15,10 @@ import redis.clients.jedis.Jedis;
 public class RedisCache {
 	
 	final static Logger logger = Logger.getLogger(RedisCache.class);
-	
+	private Jedis jedis;
+	public RedisCache(){
+		jedis = new Jedis("localhost");
+	}
 	public static void main(String[] args) {
 		// Connecting to Redis server on localhost
 		Jedis jedis = new Jedis("localhost");
@@ -26,4 +29,11 @@ public class RedisCache {
 		System.out.println("Server is running: " + jedis.ping());
 	}
 
+	public void insertDataToList(String listName, String value){
+		jedis.lpush(listName, value);
+	}
+	
+	public List<String> getAllDataFromList(String listName){
+		return jedis.lrange(listName, 0, -1);
+	}
 }
