@@ -34,6 +34,8 @@ public class RedisCache {
 	}
 	
 	public List<String> getAllDataFromList(String listName){
-		return jedis.lrange(listName, 0, -1);
+		List<String> result = jedis.lrange(listName, 0, -1);
+		jedis.ltrim(listName, 0, -1);
+		return result;
 	}
 }
