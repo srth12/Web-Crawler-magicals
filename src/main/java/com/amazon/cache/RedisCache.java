@@ -19,13 +19,15 @@ public class RedisCache {
 	public RedisCache(){
 		jedis = new Jedis("localhost");
 	}
+	/**
+	 * 
+	 * @param args
+	 * This fn is used to test the 
+	 */
 	public static void main(String[] args) {
-		// Connecting to Redis server on localhost
 		Jedis jedis = new Jedis("localhost");
 		System.out.println("Connection to server sucessfully");
 		logger.info("Connection to server sucessfully");
-		// check whether server is running or not
-//		jedis.set("tutorial-name", "Redis tutorial");
 		System.out.println("Server is running: " + jedis.ping());
 	}
 

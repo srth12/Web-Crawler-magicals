@@ -10,8 +10,6 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.amazon.dto.DataAccess;
-
 public class FileHandler {
 	final static Logger logger = Logger.getLogger(FileHandler.class);
 	
